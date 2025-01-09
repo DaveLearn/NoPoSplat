@@ -11,7 +11,7 @@ from torch import Tensor, nn
 from .backbone.croco.misc import transpose_to_landscape
 from .heads import head_factory
 from ...dataset.shims.normalize_shim import apply_normalize_shim
-from ...dataset.types import BatchedExample, DataShim
+from ...dataset.types import BatchedExample, BatchedViews, DataShim
 from ...geometry.projection import sample_image_grid
 from ..types import Gaussians
 from .backbone import Backbone, BackboneCfg, get_backbone
@@ -136,7 +136,7 @@ class EncoderNoPoSplat(Encoder[EncoderNoPoSplatCfg]):
 
     def forward(
         self,
-        context: dict,
+        context: BatchedViews,
         global_step: int = 0,
         visualization_dump: Optional[dict] = None,
     ) -> Gaussians:
