@@ -17,9 +17,12 @@ def load_encoder_config(cfg_path: str) -> EncoderCfg:
 
 
 
-def init_pretrained_encoder() -> EncoderNoPoSplat:
+def init_pretrained_encoder(hires: bool = False) -> EncoderNoPoSplat:
     cfg = load_encoder_config(Path(__file__).parent / "encoder/noposplat.yaml")
-    pretrained_path = download_pretrained("mixRe10kDl3dv.ckpt") #mixRe10kDl3dv_512x512.ckpt
+    if hires:
+        pretrained_path = download_pretrained("mixRe10kDl3dv_512x512.ckpt")
+    else:
+        pretrained_path = download_pretrained("mixRe10kDl3dv.ckpt")
 
     """
     cfg.return_depth = True
